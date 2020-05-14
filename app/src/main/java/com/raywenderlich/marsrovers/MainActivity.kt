@@ -37,6 +37,8 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -138,6 +140,10 @@ class MainActivity : AppCompatActivity() {
               if (recycler_view.adapter == null) {
                 val adapter = PhotoAdapter(sortPhotos(body))
                 recycler_view.adapter = adapter
+
+                val touchHandler = ItemTouchHelper(SwipeHandler(adapter, 0, (ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT)))
+                touchHandler.attachToRecyclerView(recycler_view)
+
               } else {
                 (recycler_view.adapter as PhotoAdapter).updatePhotos(sortPhotos(body))
               }
@@ -169,5 +175,14 @@ class MainActivity : AppCompatActivity() {
     return newPhotos
   }
 
+  class SwipeHandler(val adapter: PhotoAdapter, dragDirs : Int, swipeDirs : Int) : ItemTouchHelper.SimpleCallback(dragDirs, swipeDirs) {
+    override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, target: RecyclerView.ViewHolder?): Boolean {
+      return false
+    }
+
+    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+      adapter.removeRow(viewHolder.adapterPosition)
+    }
+  }
 
 }
