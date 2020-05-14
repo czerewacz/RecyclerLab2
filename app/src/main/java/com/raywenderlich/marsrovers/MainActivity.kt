@@ -35,6 +35,7 @@ package com.raywenderlich.marsrovers
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     setContentView(R.layout.activity_main)
 
     recycler_view.visibility = View.GONE
-    
+    recycler_view.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
     recycler_view.layoutManager = LinearLayoutManager(this)
 
     setupSpinners()

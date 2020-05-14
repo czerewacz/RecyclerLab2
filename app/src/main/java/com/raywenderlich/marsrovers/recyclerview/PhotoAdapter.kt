@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import com.bumptech.glide.Glide
 import com.raywenderlich.marsrovers.R
 import com.raywenderlich.marsrovers.models.PhotoRow
@@ -95,6 +96,10 @@ class PhotoAdapter(private var photoList: ArrayList<PhotoRow>) : RecyclerView.Ad
                 }
             }
         }
+        if (holder != null) {
+            setAnimation(holder.itemView)
+        }
+
     }
 
     class PhotoRowDiffCallback(private val newRows : List<PhotoRow>, private val oldRows : List<PhotoRow>) : DiffUtil.Callback() {
@@ -112,6 +117,13 @@ class PhotoAdapter(private var photoList: ArrayList<PhotoRow>) : RecyclerView.Ad
             val oldRow = oldRows[oldItemPosition]
             val newRow = newRows[newItemPosition]
             return oldRow == newRow
+        }
+    }
+
+    private fun setAnimation(viewToAnimate: View) {
+        if (viewToAnimate.animation == null) {
+            val animation = AnimationUtils.loadAnimation(viewToAnimate.context, android.R.anim.slide_in_left)
+            viewToAnimate.animation = animation
         }
     }
 
