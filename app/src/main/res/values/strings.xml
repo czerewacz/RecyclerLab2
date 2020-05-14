@@ -1,4 +1,5 @@
 <resources>
+ <string name="nasa_api_key">D0gjKFSNtBcW9kgIf6AJ1m5hTXQJ6LsIkGhpFZ27</string>
   <string name="app_name">MarsRovers</string>
   <string name="api_error">Problems getting Photos</string>
   <string name="rovers">Rovers</string>
